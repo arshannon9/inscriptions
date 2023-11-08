@@ -52,6 +52,8 @@ class Bibliography(models.Model):
 
     short_title = models.CharField(max_length=50, blank=True)
     entry = models.TextField(blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
+    
 
 class InscriptionBibliography(models.Model):
 
@@ -96,6 +98,7 @@ class Image(models.Model):
 class Abbreviation(models.Model):
     abbreviation = models.CharField(max_length=20, blank=True)
     expansion = models.CharField(max_length=50, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class AgeAtDeath(models.Model):
 
@@ -103,6 +106,7 @@ class AgeAtDeath(models.Model):
         verbose_name_plural = 'ages at death'
 
     age = models.CharField(max_length=50, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class DivineSacredBeing(models.Model):
 
@@ -112,6 +116,7 @@ class DivineSacredBeing(models.Model):
     divine_being = models.CharField(max_length=50, blank=True)
     epithet = models.CharField(max_length=50, blank=True)
     external_resource = models.URLField(max_length=255, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class EmperorImperialFamily(models.Model):
 
@@ -121,23 +126,28 @@ class EmperorImperialFamily(models.Model):
     person = models.CharField(max_length=50, blank=True)
     epithet = models.CharField(max_length=50, blank=True)
     external_resource = models.URLField(max_length=255, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class Erasure(models.Model):
     erased_text = models.TextField(blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class Findspot(models.Model):
     findspots_upper = models.CharField(max_length=255, blank=True)
     findspots_intermediate = models.CharField(max_length=255, blank=True)
     findspots_lower = models.CharField(max_length=255, blank=True)
     gazetteer = models.URLField(max_length=255, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class Fragment(models.Model):
     fragment = models.CharField(max_length=50, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class Organization(models.Model):
     name = models.CharField(max_length=50, blank=True)
     epithets = models.CharField(max_length=50, blank=True)
     external_resource = models.URLField(max_length=255, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class Person(models.Model):
 
@@ -146,19 +156,24 @@ class Person(models.Model):
 
     person = models.CharField(max_length=100, blank=True)
     external_resource = models.CharField(max_length=255, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class PersonalName(models.Model):
     name = models.CharField(max_length=50, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class PlaceName(models.Model):
     place_name = models.CharField(max_length=100, blank=True)
     attested_form = models.CharField(max_length=100, blank=True)
     toponym_ethnic = models.CharField(max_length=10, blank=True)
     external_resource = models.URLField(max_length=255, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class Symbol(models.Model):
     symbol = models.CharField(max_length=20, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
 class Word(models.Model):
     lemma = models.CharField(max_length=20, blank=True)
     language_code = models.CharField(max_length=2, blank=True)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)

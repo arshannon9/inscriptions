@@ -1,0 +1,13 @@
+{% extends "lepcismagna/layout.html" %} {% block body %}
+
+<h2>Abbreviations</h2>
+
+<ul>
+  {% for abbreviation in abbreviations %}
+  <li>
+    <a href="{% url 'abbreviation' abbreviation.id %}"> {{ abbreviation }} </a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
