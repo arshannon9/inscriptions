@@ -1,0 +1,48 @@
+{% extends "lepcismagna/layout.html" %} {% block body %}
+
+<div class="index-header">
+  <h2>Abbreviations</h2>
+  <ul>
+    <li>
+      <p>
+        Square brackets [ ] indicate that the name/word is partially or
+        completely restored in this inscription.
+      </p>
+      <p>
+        The 'QQQQQ' marks instances of symbols that expand to abbreviations.
+      </p>
+    </li>
+  </ul>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Abbreviations</th>
+      <th scope="col">Expansion</th>
+      <th scope="col">References</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for abbreviation in abbreviations %}
+    <tr>
+      <th scope="row">{{ abbreviation.abbreviation }}</th>
+      <td>{{ abbreviation.expansion|safe }}</td>
+      <td>
+        <ul>
+          {% for inscription_reference in abbreviation.inscription_references %}
+          <li class="inscription-list-item">
+            <a href="{% url 'inscription_detail' inscription.reference_id %}">
+              {{ inscription_reference.reference_id
+              }}.{{inscription_reference.line_number_reference }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

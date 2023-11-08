@@ -10,6 +10,7 @@ class User(AbstractUser):
  # Primary model for inscriptions   
 class Inscription(models.Model):
     entry_creation_time = models.DateTimeField(auto_now_add=True)
+    entry_creator = models.ForeignKey('User', on_delete=models.CASCADE, null=True, related_name='entries')
     is_validated = models.BooleanField(default=False)
     reference_id = models.CharField(max_length=20, blank=True)
     title = models.CharField(max_length=100, blank=True)
@@ -29,6 +30,7 @@ class Inscription(models.Model):
     commentary = models.TextField(blank=True)
     bibliography_text = models.TextField(blank=True)
     bibliography_entries = models.ManyToManyField('Bibliography', blank=True)
+    images = models.ManyToManyField('Image', blank=True)
     abbreviations = models.ManyToManyField('Abbreviation', blank=True)
     age_at_death = models.ManyToManyField('AgeAtDeath', blank=True)
     divine_sacred_beings = models.ManyToManyField('DivineSacredBeing', blank=True)
@@ -98,7 +100,14 @@ class Image(models.Model):
 class Abbreviation(models.Model):
     abbreviation = models.CharField(max_length=20, blank=True)
     expansion = models.CharField(max_length=50, blank=True)
-    inscriptions = models.ManyToManyField('Inscription', blank=True)
+    inscription_references = models.ManyToManyField('Inscription', through='InscriptionAbbreviation', blank=True)
+    
+
+# Through model for the relationship between Inscription and Abbreviation
+class InscriptionAbbreviation(models.Model):
+    inscription = models.ForeignKey('Inscription', on_delete=models.CASCADE)
+    abbreviation = models.ForeignKey('Abbreviation', on_delete=models.CASCADE)
+    line_number_reference = models.CharField(max_length=50, blank=True)
 
 class AgeAtDeath(models.Model):
 

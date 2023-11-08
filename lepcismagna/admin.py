@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Inscription, Bibliography, InscriptionBibliography, EpigraphicReference, InscriptionReference, Category, Image, Abbreviation, AgeAtDeath, DivineSacredBeing, EmperorImperialFamily, Erasure, Findspot, Fragment, Organization, Person, PersonalName, PlaceName, Symbol, Word
+from .models import User, Inscription, Bibliography, InscriptionBibliography, EpigraphicReference, InscriptionReference, Category, Image, Abbreviation, InscriptionAbbreviation, AgeAtDeath, DivineSacredBeing, EmperorImperialFamily, Erasure, Findspot, Fragment, Organization, Person, PersonalName, PlaceName, Symbol, Word
 
 # Register your models here.
 admin.site.register(User)
@@ -11,6 +11,7 @@ admin.site.register(InscriptionReference)
 admin.site.register(Category)
 admin.site.register(Image)
 admin.site.register(Abbreviation)
+admin.site.register(InscriptionAbbreviation)
 admin.site.register(AgeAtDeath)
 admin.site.register(DivineSacredBeing)
 admin.site.register(EmperorImperialFamily)

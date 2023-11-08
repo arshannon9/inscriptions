@@ -90,6 +90,11 @@ p {
   cursor: pointer;
 }
 
+.inscription-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
 .navbar {
   color: #d6544d;
   --bs-navbar-brand-font-size: 32px;
