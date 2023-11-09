@@ -6,6 +6,9 @@ body {
 
 footer {
   color: #d6544d;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 form {
@@ -17,9 +20,10 @@ form {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
-  line-height: 42px;
+  line-height: 32px;
+  align-content: center;
 }
 
 h2 {
@@ -73,6 +77,11 @@ p {
 .accordion-button {
   --bs-accordion-active-color: black;
   background-color: #d6544d !important;
+}
+
+.bi {
+  margin-right: 15px;
+  font-size: 32px;
 }
 
 .btn-danger {
@@ -160,17 +169,22 @@ p {
   padding-bottom: 20px;
 }
 
-.tab-content {
-  border: 1px solid black;
-}
-
 .navbar {
   color: #d6544d;
   --bs-navbar-brand-font-size: 32px;
 }
 
+.navbar-brand {
+  display: flex;
+  flex-direction: row;
+}
+
 .navbar-toggler {
   color: #d6544d;
+}
+
+.tab-content {
+  border: 1px solid black;
 }
 
 .text-danger {
