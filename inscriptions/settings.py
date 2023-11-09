@@ -128,3 +128,26 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 # Define the media root and URL
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+AUTH_USER_MODEL = 'lepcismagna.User'
+
+""" LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+} """

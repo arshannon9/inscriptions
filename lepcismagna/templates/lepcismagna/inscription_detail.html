@@ -1,17 +1,38 @@
 {% extends "lepcismagna/layout.html" %} {% block body %}
 
 <div class="inscription-header">
-  <h1>{{ inscription.reference_id }} | {{ inscription.title }}</h1>
+  <h1>{{ inscription.reference_id }} - {{ inscription.title }}</h1>
+  {% if inscription in user.dossier.all %}
+  <form
+    method="POST"
+    action="{% url 'toggle_dossier' reference_id=inscription.reference_id %}"
+  >
+    {% csrf_token %}
+    <input
+      class="btn btn-secondary"
+      type="submit"
+      value="Remove from Dossier"
+    />
+  </form>
+  {% else %}
+  <form
+    method="POST"
+    action="{% url 'toggle_dossier' reference_id=inscription.reference_id %}"
+  >
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" value="Add to Dossier" />
+  </form>
+  {% endif %}
 </div>
 
-<div class="inscription-info">
+<div class="inscr-div inscription-info">
   <p><strong>Description: </strong>{{ inscription.description }}</p>
   <p><strong>Text: </strong>{{ inscription.text }}</p>
   <p><strong>Letters: </strong>{{ inscription.letters }}</p>
   <p><strong>Date: </strong>{{ inscription.date }}</p>
 </div>
 
-<div class="inscription-locations">
+<div class="inscr-div inscription-locations">
   <p><strong>Findspot: </strong>{{ inscription.findspot_desc }}</p>
   <p><strong>Original location: </strong>{{ inscription.original_location }}</p>
   <p>
@@ -20,7 +41,7 @@
   </p>
 </div>
 
-<div class="inscription-transcriptions">
+<div class="inscr-div inscription-transcriptions">
   <ul class="nav nav-tabs" id="transcriptions" role="tablist">
     <li class="nav-item" role="presentation">
       <button
@@ -72,33 +93,37 @@
 </div>
 
 {% if inscription.transcription_appcrit %}
-<div class="inscription-appcrit">
+<div class="inscr-div inscription-appcrit">
   <p>{{ inscription.transcription_appcrit }}</p>
 </div>
 {% endif %}
 
-<div class="inscription-translation">
+<div class="inscr-div inscription-translation">
   <p><strong>English translation</strong></p>
   <p>{{ inscription.translation_english|safe }}</p>
 </div>
 
-<div class="inscription-commentary">
+<div class="inscr-div inscription-commentary">
   <p><strong>Commentary</strong></p>
   <p>{{ inscription.commentary }}</p>
 </div>
 
-<div class="inscription-bibliography">
+<div class="inscr-div inscription-bibliography">
   <p><strong>Bibliography</strong></p>
   {{ inscription.bibliography_text }}
 </div>
 
-<div class="inscription-images">
+<div class="inscr-div inscription-images">
+  <p><strong>Images</strong></p>
   {% if inscription.images.all %}
   <img
     class="inscription-thumbnail"
     src="{{ inscription.images.all.0.image_url }}"
     alt="{{ inscription.title }}"
   />
+  <caption>
+    {{ inscription.images.all.0.caption }}
+  </caption>
   {% endif %}
 </div>
 

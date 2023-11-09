@@ -6,4 +6,4 @@ from lepcismagna.models import Inscription
 class InscriptionEntryForm(ModelForm):
     class Meta:
         model = Inscription
-        fields = ['reference_id', 'title', 'description', 'text', 'letters', 'date', 'findspot_desc', 'associated_inscr', 'original_location', 'last_recorded_location', 'category', 'transcription_interpretive', 'transcription_diplomatic', 'transcription_appcrit', 'translation_english', 'commentary', 'bibliography_text', 'images']
+        fields = ['reference_id', 'title', 'description', 'text', 'letters', 'date', 'findspot_desc', 'original_location', 'last_recorded_location', 'transcription_interpretive', 'transcription_diplomatic', 'transcription_appcrit', 'translation_english', 'commentary', 'bibliography_text']

@@ -1,8 +1,10 @@
 {% extends "lepcismagna/layout.html" %} {% block body %}
 <div class="container" id="inscriptions">
-  <h2>{{ user.username }}'s Dossier</h2>
+  <div class="index-header">
+    <h2>{{ user.username }}'s Dossier</h2>
+  </div>
   <ul id="inscriptions-list">
-    {% for inscription in inscriptions %}
+    {% for inscription in dossier_inscriptions %}
     <li>
       <a
         href="{% url 'inscription_detail' inscription.reference_id %}"

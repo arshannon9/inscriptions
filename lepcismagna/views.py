@@ -101,12 +101,13 @@ def dossier(request):
 
 @login_required
 def toggle_dossier(request, reference_id):
-    # Add or remove inscription from dossier
-    inscription = get_object_or_404(Inscription, reference_id=reference_id)
-    if inscription in request.user.dossier.all():
-        request.user.dossier.remove(inscription)
-    else:
-        request.user.dossier.add(inscription)
+    if request.method == 'POST':
+        # Add or remove inscription from dossier
+        inscription = get_object_or_404(Inscription, reference_id=reference_id)
+        if inscription in request.user.dossier.all():
+            request.user.dossier.remove(inscription)
+        else:
+            request.user.dossier.add(inscription)
     return HttpResponseRedirect(reverse('inscription_detail', args=[reference_id]))
 
 # Inscription information handling

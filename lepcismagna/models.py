@@ -1,16 +1,13 @@
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Model for user handling
 class User(AbstractUser):
     dossier = models.ManyToManyField("Inscription", blank=True, related_name="dossiers")
-    groups = models.ManyToManyField(Group, verbose_name='groups', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='custom_user_groups')
-    user_permissions = models.ManyToManyField(Permission, verbose_name='user_permissions', blank=True, help_text='Specific permissions for this user.', related_name='custom_user_permissions')
 
  # Primary model for inscriptions   
 class Inscription(models.Model):
     entry_creation_time = models.DateTimeField(auto_now_add=True)
-    entry_creator = models.ForeignKey('User', on_delete=models.CASCADE, null=True, related_name='entries')
     is_validated = models.BooleanField(default=False)
     reference_id = models.CharField(max_length=20, blank=True)
     title = models.CharField(max_length=100, blank=True)
@@ -45,6 +42,9 @@ class Inscription(models.Model):
     symbols = models.ManyToManyField('Symbol', blank=True)
     words = models.ManyToManyField('Word', blank=True)
 
+    def __str__(self):
+        return self.reference_id
+
 
 # Models for bibliography information handling
 class Bibliography(models.Model):
@@ -55,6 +55,9 @@ class Bibliography(models.Model):
     short_title = models.CharField(max_length=50, blank=True)
     entry = models.TextField(blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
+
+    def __str__(self):
+        return self.short_title
     
 
 class InscriptionBibliography(models.Model):
@@ -70,6 +73,9 @@ class EpigraphicReference(models.Model):
     short_title = models.CharField(max_length=50, blank=True)
     entry = models.TextField(blank=True)
     inscriptions = models.ManyToManyField('Inscription', through='InscriptionReference', blank=True)
+
+    def __str__(self):
+        return self.short_title
 
 # Through model connecting Inscription and EpigraphicReference
 class InscriptionReference(models.Model):
@@ -91,10 +97,13 @@ class Category(models.Model):
     
 # Model for image handling
 class Image(models.Model):
-    inscription_id = models.ForeignKey('Inscription', on_delete=models.CASCADE)
+    reference_id = models.ForeignKey('Inscription', on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     image_url = models.URLField(max_length=255, blank=True)
     caption = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.caption
 
 
 # Models for index handling
@@ -102,6 +111,9 @@ class Abbreviation(models.Model):
     abbreviation = models.CharField(max_length=20, blank=True)
     expansion = models.CharField(max_length=50, blank=True)
     inscription_references = models.ManyToManyField('Inscription', through='InscriptionAbbreviation', blank=True)
+    
+    def __str__(self):
+        return f"{ self.abbreviation } - { self.expansion }"
     
 
 # Through model for the relationship between Inscription and Abbreviation
@@ -118,6 +130,9 @@ class AgeAtDeath(models.Model):
     age = models.CharField(max_length=50, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
 
+    def __str__(self):
+        return self.age
+
 class DivineSacredBeing(models.Model):
 
     class Meta:
@@ -127,6 +142,9 @@ class DivineSacredBeing(models.Model):
     epithet = models.CharField(max_length=50, blank=True)
     external_resource = models.URLField(max_length=255, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
+
+    def __str__(self):
+        return f"{ self.divine_being } - { self.epithet }"
 
 class EmperorImperialFamily(models.Model):
 
@@ -138,9 +156,15 @@ class EmperorImperialFamily(models.Model):
     external_resource = models.URLField(max_length=255, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
 
+    def __str__(self):
+        return f"{ self.person } - { self.epithet }"
+
 class Erasure(models.Model):
     erased_text = models.TextField(blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
+
+    def __str__(self):
+        return self.erased_text
 
 class Findspot(models.Model):
     findspots_upper = models.CharField(max_length=255, blank=True)
@@ -149,15 +173,24 @@ class Findspot(models.Model):
     gazetteer = models.URLField(max_length=255, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
 
+    def __str__(self):
+        return f"{self.findspots_upper}, {self.findspots_intermediate}, {self.findspots_lower}"
+
 class Fragment(models.Model):
     fragment = models.CharField(max_length=50, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
+
+    def __str__(self):
+        return self.fragment
 
 class Organization(models.Model):
     name = models.CharField(max_length=50, blank=True)
     epithets = models.CharField(max_length=50, blank=True)
     external_resource = models.URLField(max_length=255, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
+
+    def __str__(self):
+        return f"{ self.name } - { self.epithets }"
 
 class Person(models.Model):
 
@@ -168,9 +201,15 @@ class Person(models.Model):
     external_resource = models.CharField(max_length=255, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
 
+    def __str__(self):
+        return self.person
+
 class PersonalName(models.Model):
     name = models.CharField(max_length=50, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
+
+    def __str__(self):
+        return self.name
 
 class PlaceName(models.Model):
     place_name = models.CharField(max_length=100, blank=True)
@@ -179,11 +218,19 @@ class PlaceName(models.Model):
     external_resource = models.URLField(max_length=255, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
 
+    def __str__(self):
+        return f"{ self.place_name } - { self.attested_form }"
+
 class Symbol(models.Model):
     symbol = models.CharField(max_length=20, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
+    def __str__(self):
+        return self.symbol
 
 class Word(models.Model):
     lemma = models.CharField(max_length=20, blank=True)
     language_code = models.CharField(max_length=2, blank=True)
     inscriptions = models.ManyToManyField('Inscription', blank=True)
+
+    def __str__(self):
+        return self.lemma
