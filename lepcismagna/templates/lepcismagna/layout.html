@@ -76,32 +76,6 @@
               </a>
             </li>
 
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'create_entry' %}">
-                Create New Entry
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'dossier' %}">
-                Epigraphic Dossier
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}"> Logout </a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}"> Login </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'register' %}"> Register </a>
-            </li>
-            {% endif %}
-
             <li class="nav-item dropdown">
               <div class="btn-group">
                 <button class="btn btn-danger">Indices</button>
@@ -183,6 +157,31 @@
                 </ul>
               </div>
             </li>
+
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'create_entry' %}">
+                Create New Entry
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'dossier' %}">
+                Epigraphic Dossier
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}"> Logout </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}"> Login </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}"> Register </a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>

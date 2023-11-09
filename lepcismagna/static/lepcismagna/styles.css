@@ -186,6 +186,11 @@ p {
   margin: 0;
 }
 
+#login-form,
+#register-form {
+  width: 25%;
+}
+
 #transcriptions-content {
   padding: 10px;
   word-wrap: break-word;

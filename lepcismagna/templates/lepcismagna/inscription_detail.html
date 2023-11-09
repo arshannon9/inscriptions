@@ -2,25 +2,20 @@
 
 <div class="inscription-header">
   <h1>{{ inscription.reference_id }} - {{ inscription.title }}</h1>
-  {% if inscription in user.dossier.all %}
+  {% if user.is_authenticated %}
   <form
     method="POST"
     action="{% url 'toggle_dossier' reference_id=inscription.reference_id %}"
   >
-    {% csrf_token %}
+    {% csrf_token %} {% if inscription in user.dossier.all %}
     <input
       class="btn btn-secondary"
       type="submit"
       value="Remove from Dossier"
     />
-  </form>
-  {% else %}
-  <form
-    method="POST"
-    action="{% url 'toggle_dossier' reference_id=inscription.reference_id %}"
-  >
-    {% csrf_token %}
+    {% else %}
     <input class="btn btn-danger" type="submit" value="Add to Dossier" />
+    {% endif %}
   </form>
   {% endif %}
 </div>
