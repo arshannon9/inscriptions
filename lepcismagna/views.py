@@ -12,7 +12,7 @@ from .forms import InscriptionEntryForm
 def index(request):
     if request.user.is_authenticated:
         # If user is logged in, redirect to profile page
-        return redirect('profile', username=request.user.username)
+        return render(request, "lepcismagna/index.html")
     else:
         return HttpResponseRedirect(reverse('login'))
     
@@ -72,7 +72,8 @@ def register(request):
 @login_required
 def profile(request, username):
     # Display user's profile page
-    user = get_object_or_404(User, username=username)
+    if request.method == 'POST':
+        user = get_object_or_404(User, username=username)
     return render(request, 'lepcismagna/profile.html', {'user': user})
     
 @login_required
@@ -146,7 +147,7 @@ def bibliography(request):
 # Epigraphic indices handling
 
 def abbreviations(request):
-    abbreviations = Abbreviation.objects.all()
+    abbreviations = Abbreviation.objects.prefetch_related('inscription_references')
     return render(request, "lepcismagna/abbreviations.html", {"abbreviations": abbreviations})
 
 def ages_at_death(request):

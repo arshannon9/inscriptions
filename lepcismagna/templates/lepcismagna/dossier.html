@@ -1,6 +1,6 @@
 {% extends "lepcismagna/layout.html" %} {% block body %}
 <div class="container" id="inscriptions">
-  <h2>Inscriptions</h2>
+  <h2>{{ user.username }}'s Dossier</h2>
   <ul id="inscriptions-list">
     {% for inscription in inscriptions %}
     <li>
@@ -19,7 +19,7 @@
           <div class="inscription-info">
             <h3>{{ inscription.title }}</h3>
             <h4>{{ inscription.reference_id }}</h4>
-            <p><strong>Findspot: </strong>{{ inscription.findspot_desc }}</p>
+            <p>{{ inscription.description }}</p>
           </div>
         </div>
       </a>

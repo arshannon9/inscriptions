@@ -19,7 +19,7 @@ class Inscription(models.Model):
     letters = models.TextField(blank=True)
     date = models.CharField(max_length=50)
     findspot_desc = models.TextField(blank=True)
-    associated_inscr = models.ManyToManyField('self')
+    associated_inscr = models.ManyToManyField('self', blank=True)
     original_location = models.CharField(max_length=255)
     last_recorded_location = models.CharField(max_length=255)
     category = models.ManyToManyField('Category', blank=True)
@@ -93,6 +93,7 @@ class Category(models.Model):
 class Image(models.Model):
     inscription_id = models.ForeignKey('Inscription', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
+    image_url = models.URLField(max_length=255, blank=True)
     caption = models.CharField(max_length=255, blank=True)
 
 

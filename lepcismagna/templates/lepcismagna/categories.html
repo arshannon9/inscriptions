@@ -2,12 +2,23 @@
 
 <h2>Categories</h2>
 
-<ul>
-  {% for category in categories %}
-  <li>
-    <a href="{% url 'category' category.id %}"> {{ category }} </a>
-  </li>
-  {% endfor %}
-</ul>
+<table class="table table-striped table-hover table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Category</th>
+    </tr>
+  </thead>
+  <tbody class="table-light">
+    {% for category in categories %}
+    <tr>
+      <th scope="row">
+        <a href="{% url 'category_view' category.name %}" class="category-link"
+          >{{ category.name }}</a
+        >
+      </th>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}

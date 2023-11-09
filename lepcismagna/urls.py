@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
@@ -6,7 +8,7 @@ urlpatterns = [
     path("login", views.login_view, name="login"),
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
-    path("users/<str:username>", views.profile, name="profile"),
+    path("profile/<str:username>", views.profile, name="profile"),
     path("create_entry", views.create_entry, name="create_entry"),
     path("dossier", views.dossier, name="dossier"),
     path("toggle_dossier/<str:reference_id>", views.toggle_dossier, name="toggle_dossier"),
@@ -29,3 +31,6 @@ urlpatterns = [
     path("symbols", views.symbols, name="symbols"),
     path("words", views.words, name="words")
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

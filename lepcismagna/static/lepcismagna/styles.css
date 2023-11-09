@@ -30,18 +30,31 @@ h2 {
   margin-bottom: 15px;
 }
 
-h3 {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 20px;
-}
-
 img {
   max-width: 100%;
 }
 
 li:not(last-child) {
   margin-bottom: 5px;
+}
+
+li .container {
+  display: flex;
+  width: 100%;
+  height: 190px;
+  flex-direction: row;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}
+
+li .container:hover {
+  box-shadow: 10px 10px 5px grey;
+  cursor: pointer;
+}
+
+main {
+  background-color: palegoldenrod;
 }
 
 p {
@@ -90,9 +103,43 @@ p {
   cursor: pointer;
 }
 
+.indent {
+  text-indent: 50px;
+}
+
+.index-header {
+  padding: 10px;
+}
+
+.index-header-list {
+  list-style: none;
+}
+
 .inscription-list-item {
   display: inline-block;
   margin-right: 10px;
+}
+
+.inscription-link,
+.inscription-link:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.inscription-thumbnail {
+  display: block;
+  max-width: 200px;
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
+.tab-content {
+  border: 1px solid black;
+}
+
+.main-container {
+  padding: 15px;
 }
 
 .navbar {
@@ -108,6 +155,17 @@ p {
   color: #d6544d !important;
 }
 
-#gallery-modal .modal-img {
-  width: 100%;
+#inscriptions-list,
+#category-items,
+#dossier-list {
+  list-style: none;
+  padding-left: 0;
+
+  margin: 0;
+}
+
+#transcriptions-content {
+  padding: 10px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
 }
