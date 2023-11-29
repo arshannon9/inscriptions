@@ -74,7 +74,7 @@
 6. **Indices:**
 
    - Both registered and non-registered users can access the 'Indices', a series of pages that display indexed lists of epigraphic data relevant to particular inscriptions, including abbreviations, age at death, divine and sacred beings, emperors and imperial family, erasures, findspots, fragments, organizations, people, personal names, place names, symbols, words.
-   - The choice of indexes is modeled after the [Inscriptions of Roman Tripolitania 2021 project] (https://irt2021.inslib.kcl.ac.uk/en/)
+   - The choice of indexes is modeled after the Inscriptions of Roman Tripolitania 2021 project (https://irt2021.inslib.kcl.ac.uk/en/)
 
 7. **Create New Entry:**
 
