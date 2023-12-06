@@ -1,6 +1,6 @@
 {% extends "lepcismagna/layout.html" %} {% block body %}
 
-<h2>Create Listing</h2>
+<h2>Create New Entry</h2>
 
 <form action="{% url 'create_entry' %}" method="post">
   {% csrf_token %} {% for field in form %}

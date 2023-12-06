@@ -19,7 +19,7 @@ class Inscription(models.Model):
     associated_inscr = models.ManyToManyField('self', blank=True)
     original_location = models.CharField(max_length=255)
     last_recorded_location = models.CharField(max_length=255)
-    category = models.ManyToManyField('Category', blank=True)
+    categories = models.ManyToManyField('Category', blank=True)
     transcription_interpretive = models.TextField(blank=True)
     transcription_diplomatic = models.TextField(blank=True)
     transcription_appcrit = models.TextField(blank=True)
@@ -43,7 +43,7 @@ class Inscription(models.Model):
     words = models.ManyToManyField('Word', blank=True)
 
     def __str__(self):
-        return self.reference_id
+        return f"{ self.reference_id } - { self.title }"
 
 
 # Models for bibliography information handling
@@ -86,11 +86,11 @@ class InscriptionReference(models.Model):
 
 # Model for category handling
 class Category(models.Model):
-
     class Meta:
         verbose_name_plural = 'categories'
 
     name = models.CharField(max_length=100)
+    inscriptions = models.ManyToManyField('Inscription', blank=True)
 
     def __str__(self):
         return self.name
